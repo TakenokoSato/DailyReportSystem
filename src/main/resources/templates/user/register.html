@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>DailyReportSystem of Thymeleaf</title>
+</head>
+<body>
+    <h1>従業員　新規登録ページ</h1>
+    <form method="post" th:action="@{/user/register}" th:object="${employee}">
+
+        <label for="authentication.code">社員番号</label>
+        <input type="text" th:field="*{authentication.code}">
+        <br>
+        <label for="name">氏名</label>
+        <input type="text"  th:field="*{name}">
+        <br>
+        <label for="authentication.password">パスワード</label>
+        <input type="text" th:field="*{authentication.password}" >
+        <br>
+        <label for="authentication.role">権限</label>
+        <select th:field="*{authentication.role}">
+          <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}" th:value="${item}" th:text="${item}">
+        </select>
+        <br>
+        <input type="submit" value="投稿">
+    </form>
+    <a th:href="@{/user/list}">登録せずに一覧に戻る</a>
+</body>
+</html>
