@@ -18,7 +18,7 @@ public class UserDetailService implements UserDetailsService {
         this.authenticationRepository = repository;
     }
 
-    private final List<SimpleGrantedAuthority> authorities;
+    //private final List<SimpleGrantedAuthority> authorities;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,11 +30,11 @@ public class UserDetailService implements UserDetailsService {
         return new UserDetail(authentication.get().getEmployee());
     }
 
-    public UserDetails(Employee employee) {
-        this.employee = employee;
+    //public UserDetails(Employee employee) {
+        //this.employee = employee;
 
-        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(employee.getAuthentication().getRole().toString()));
-        this.authorities = authorities;
-    }
+        //List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        //authorities.add(new SimpleGrantedAuthority(employee.getAuthentication().getRole().toString()));
+        //this.authorities = authorities;
+    //}
 }

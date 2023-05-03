@@ -1,6 +1,5 @@
 package com.techacademy.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -9,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-
+//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.techacademy.entity.Employee;
@@ -25,7 +23,7 @@ public class EmployeeController {
         this.service = service;
     }
 
-    @Autowired
+    //@Autowired
     //private PasswordEncoder passwordEncoder;
 
     /** 一覧画面を表示 */
@@ -77,7 +75,6 @@ public class EmployeeController {
     /** Employee更新処理 */
     @PostMapping("/update/{id}/")
     public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("employee") Employee employee,Employee existing) {
-        ///@RequestParam("updatedAt") LocalDateTime updatedAt
         // パスワードの入力がnullかどうか確認し、nullの場合は、前のパスワードをセットする。
         if ((employee.getAuthentication().getPassword().isEmpty())){
             existing = service.getEmployee(id);
