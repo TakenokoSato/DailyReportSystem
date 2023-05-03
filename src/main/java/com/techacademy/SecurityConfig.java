@@ -26,6 +26,12 @@ public class SecurityConfig {
                             .permitAll()
                          .anyRequest().authenticated()
                               );
+        // authorizeHttpRequests(auth -> auth
+        //  .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+         //     .permitAll()                 // css等は未ログインでアクセス可
+         // .mvcMatchers("/employee/**").hasAuthority("管理者") // 追記部分：従業員管理は管理者のみアクセス可
+        //  .anyRequest().authenticated()    // その他はログイン必要
+     // );
         return http.build();
     }
 
@@ -34,4 +40,5 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

@@ -18,6 +18,8 @@ public class UserDetailService implements UserDetailsService {
         this.authenticationRepository = repository;
     }
 
+    private final List<SimpleGrantedAuthority> authorities;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Authentication> authentication = authenticationRepository.findById(username);
@@ -26,5 +28,13 @@ public class UserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("Exception:Username Not Found");
         }
         return new UserDetail(authentication.get().getEmployee());
+    }
+
+    public UserDetails(Employee employee) {
+        this.employee = employee;
+
+        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(employee.getAuthentication().getRole().toString()));
+        this.authorities = authorities;
     }
 }
