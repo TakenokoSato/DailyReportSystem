@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
@@ -21,6 +24,9 @@ public class EmployeeController {
     public EmployeeController(EmployeeService service) {
         this.service = service;
     }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /** 一覧画面を表示 */
     @GetMapping("/list")
@@ -52,6 +58,7 @@ public class EmployeeController {
     @PostMapping("/register")
     public String postRegister(Employee employee) {
         employee.getAuthentication().setEmployee(employee);
+        employee.getAuthentication().setPassword(passwordEncoder.encode(employee.getAuthentication().getPassword()));
         // Employee登録
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
@@ -79,7 +86,7 @@ public class EmployeeController {
         }
         // Employee登録
         employee.getAuthentication().setEmployee(employee);
-        //employee.setUpdatedAt(updatedAt);
+        //authentication.setPassword(passwordEncoder.encode(password));
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
         return "redirect:/employee/list";
