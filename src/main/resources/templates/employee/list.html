@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DailyReportSystem of Thymeleaf</title>
-<link rel="stylesheet" th:href="@{/css/user/list.css}">
+<link rel="stylesheet" th:href="@{/css/employee/list.css}">
 </head>
 <body>
     <h1>従業員 一覧</h1>
@@ -17,11 +17,11 @@
             <td th:text="${employee.id}"></td>
             <td th:text="${employee.name}"></td>
             <td>
-                <a th:href="@{/user/detail/{id}/(id=${employee.id})}">詳細を見る</a>
+                <a th:href="@{/employee/detail/{id}/(id=${employee.id})}">詳細を見る</a>
             </td>
         </tr>
     </table>
     <p th:text="'(全'+${employeelistSize}+'件)'"></p>
-    <p><a th:href="@{/user/register}">新規従業員の登録</a></p>
+    <p><a th:href="@{/employee/register}">新規従業員の登録</a></p>
 </body>
 </html>

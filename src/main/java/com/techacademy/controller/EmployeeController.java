@@ -14,7 +14,7 @@ import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("employee")
 public class EmployeeController {
     private final EmployeeService service;
 
@@ -29,8 +29,8 @@ public class EmployeeController {
      model.addAttribute("employeelist",service.getEmployeeList());
      // 検索件数をModelに登録
      model.addAttribute("employeelistSize",service.getEmployeeList().size());
-     // user/list.htmlに画面遷移
-     return "user/list";
+     // employee/list.htmlに画面遷移
+     return "employee/list";
     }
 
     /** 詳細画面を表示 */
@@ -39,13 +39,13 @@ public class EmployeeController {
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
         // Employee詳細画面に遷移
-        return "user/detail";
+        return "employee/detail";
     }
 
     /** employee登録画面を表示 */
     @GetMapping("/register")
     public String getRegister(@ModelAttribute Employee employee) {
-        return "user/register";
+        return "employee/register";
     }
 
     /** employee登録画面を表示 */
@@ -55,7 +55,7 @@ public class EmployeeController {
         // Employee登録
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
-        return "redirect:/user/list";
+        return "redirect:/employee/list";
     }
 
     /** Employee更新画面を表示 */
@@ -63,8 +63,8 @@ public class EmployeeController {
     public String getUpdate(@PathVariable("id") Integer id, Model model) {
         // Modelに登録
         model.addAttribute("employee", service.getEmployee(id));
-        // User更新画面に遷移
-        return "user/update";
+        // employee更新画面に遷移
+        return "employee/update";
     }
 
     /** Employee更新処理 */
@@ -82,7 +82,7 @@ public class EmployeeController {
         //employee.setUpdatedAt(updatedAt);
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
-        return "redirect:/user/list";
+        return "redirect:/employee/list";
     }
 
     /** Employee更新処理 */
@@ -93,6 +93,6 @@ public class EmployeeController {
         employee.setDeleteFlag(1);
         service.saveEmployee(employee);
         // 一覧画面にリダイレクト
-        return "redirect:/user/list";
+        return "redirect:/employee/list";
     }
 }

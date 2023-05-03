@@ -29,7 +29,7 @@
             <td th:text="${#temporals.format(employee.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
         </tr>
     </table>
-    <p><a th:href="@{/user/update/{id}/(id=${employee.id})}">この従業員情報を編集する</a></p>
-    <a th:href="@{/user/list}">一覧に戻る</a>
+    <p><a th:href="@{/employee/update/{id}/(id=${employee.id})}">この従業員情報を編集する</a></p>
+    <a th:href="@{/employee/list}">一覧に戻る</a>
 </body>
 </html>
