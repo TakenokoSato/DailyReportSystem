@@ -9,7 +9,7 @@
   <p>パスワードは変更する場合のみ入力してください</p>
   <form method="post" th:action="@{/employee/update/{id}/(id=${employee.id})}" th:object="${employee}">
      <label for="authentication.code">社員番号</label>
-        <input type="text" th:field="*{authentication.code}">
+      <input type="text" th:field="*{authentication.code}" th:disabled="${someBooleanValue}">
         <br>
      <label for="name">氏名</label>
         <input type="text" th:field="*{name}">

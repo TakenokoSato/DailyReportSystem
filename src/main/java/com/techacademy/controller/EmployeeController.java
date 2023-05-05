@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -54,7 +57,12 @@ public class EmployeeController {
 
     /** employee登録画面を表示 */
     @PostMapping("/register")
-    public String postRegister(Employee employee) {
+    public String postRegister(Employee employee, Model model) {
+
+        if("".equals(employee.getAuthentication().getCode())||"".equals(employee.getAuthentication().getPassword())|| "".equals(employee.getName())) {
+            model.addAttribute("error","必須項目が空欄となっています。");
+            return "employee/register";
+        }
         employee.getAuthentication().setEmployee(employee);
         //employee.getAuthentication().setPassword(passwordEncoder.encode(employee.getAuthentication().getPassword()));
         // Employee登録

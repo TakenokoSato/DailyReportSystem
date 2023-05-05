@@ -20,6 +20,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotEmpty;
+
 import lombok.Data;
 
 
@@ -37,6 +39,7 @@ public class Employee {
 
     /** 氏名 */
     @Column(length = 20)
+    @NotEmpty
     private String name;
 
     /** 削除フラグ */

@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -27,10 +30,12 @@ public class Authentication {
 
     /** 社員番号 */
     @Id
+    @NotBlank
     @Column(length = 20)
     private String code;
 
     /** パスワード */
+    @NotBlank
     @Column(length = 255)
     private String password;
 

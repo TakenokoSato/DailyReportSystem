@@ -14,7 +14,7 @@
             <th>操作</th>
         </tr>
         <tr th:each="employee : ${employeelist}">
-            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.authentication.code}"></td>
             <td th:text="${employee.name}"></td>
             <td>
                 <a th:href="@{/employee/detail/{id}/(id=${employee.id})}">詳細を見る</a>

@@ -9,13 +9,13 @@
     <form method="post" th:action="@{/employee/register}" th:object="${employee}">
 
         <label for="authentication.code">社員番号</label>
-        <input type="text" th:field="*{authentication.code}">
+        <input type="text" th:field="*{authentication.code}">  <a th:text="${error}"></a>
         <br>
         <label for="name">氏名</label>
-        <input type="text"  th:field="*{name}">
+        <input type="text"  th:field="*{name}">  <a th:text="${error}"></a>
         <br>
         <label for="authentication.password">パスワード</label>
-        <input type="text" th:field="*{authentication.password}" >
+        <input type="password" th:field="*{authentication.password}" >  <a th:text="${error}"></a>
         <br>
         <label for="authentication.role">権限</label>
         <select th:field="*{authentication.role}">
