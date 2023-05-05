@@ -12,10 +12,10 @@
       <input type="text" th:field="*{authentication.code}" th:disabled="${someBooleanValue}">
         <br>
      <label for="name">氏名</label>
-        <input type="text" th:field="*{name}">
+        <input type="text" th:field="*{name}">　 <a th:text="${error}"></a>
         <br>
      <label for="authentication.password">パスワード</label>
-        <input type="password" th:field="*{authentication.password}">
+        <input type="password" th:field="*{authentication.password}">　 <a th:text="${error}"></a>
         <br>
        　<!--<input type="hidden" name="updatedAt" th:field="*{updatedAt}"  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />-->
 

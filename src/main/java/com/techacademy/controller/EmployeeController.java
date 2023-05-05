@@ -82,7 +82,11 @@ public class EmployeeController {
 
     /** Employee更新処理 */
     @PostMapping("/update/{id}/")
-    public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("employee") Employee employee,Employee existing) {
+    public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("employee") Employee employee,Employee existing, Model model) {
+        if("".equals(employee.getAuthentication().getPassword())|| "".equals(employee.getName())) {
+            model.addAttribute("error","必須項目が空欄となっています。");
+            return "employee/register";
+        }
         // パスワードの入力がnullかどうか確認し、nullの場合は、前のパスワードをセットする。
         if ((employee.getAuthentication().getPassword().isEmpty())){
             existing = service.getEmployee(id);
