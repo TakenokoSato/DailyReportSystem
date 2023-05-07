@@ -33,5 +33,9 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    public Employee findByName(String name) {
+        return employeeRepository.findByName(name);
+    }
+
 }
 

@@ -5,20 +5,20 @@
 <title>DailyReportSystem of Thymeleaf</title>
 </head>
 <body>
-  <h1 th:text="日報 編集ページ'"></h1>
+  <h1>日報 編集ページ</h1>
   <form method="post" th:action="@{/report/update/{id}/(id=${report.id})}" th:object="${report}">
-     <label for="report.reportDate">日付</label>　　 <a th:text="${error}"></a>
-     <input type="date" th:field="*{report.reportDate}">
+     <label for="reportDate">日付</label>　　 <a th:text="${error}"></a>
+     <input type="date" th:field="*{reportDate}">
         <br>
-     <label for="name">氏名</label>
-     <input type="text" th:field="*{report.employee.name}" disabled>
-     <input type="hidden" th:field="*{report.employee.name}">
+     <label for="employee.name">氏名</label>
+     <input type="text" th:field="*{employee.name}" disabled>
+     <input type="hidden" th:field="*{employee.name}">
         <br>
-     <label for="report.title">タイトル</label>
-        <input type="text" th:field="*{report.title}">
+     <label for="title">タイトル</label>
+        <input type="text" th:field="*{title}">
         <br>
-     <label for="report.content">内容</label>
-        <textarea th:field="*{report.content}" > </textarea>
+     <label for="content">内容</label>
+        <textarea th:field="*{content}" > </textarea>
         <br>
         <br>
      <input type="submit" value="投稿">

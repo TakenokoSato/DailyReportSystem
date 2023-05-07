@@ -12,11 +12,14 @@
         <input type="date" th:field="*{reportDate}">  <a th:text="${error}"></a>
         <br>
         <label for="employee.name">氏名</label>
-        <input type="text"  th:field="*{employee.name}" th:value="${loginname}" disabled>
-        <input type="hidden"  th:field="*{employee.name}">
+        <span th:text="${employee.name}"></span>
+        <!--<span th:text="${loginname}"></span>-->
+        <br>
+        <label for="title">タイトル</label>
+        <input type="text" th:field="*{title}"> <a th:text="${error}"></a>
         <br>
         <label for="content">内容</label>
-        <textarea th:field="*{content}" > </textarea>
+        <textarea th:field="*{content}" > </textarea> <a th:text="${error}"></a>
         <br>
         <br>
         <input type="submit" value="投稿">

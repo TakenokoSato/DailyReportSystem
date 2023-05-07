@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.techacademy.entity.Report;
 import com.techacademy.service.ReportService;
+import com.techacademy.entity.Employee;
+import com.techacademy.service.EmployeeService;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,9 +21,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 @RequestMapping("report")
 public class ReportController {
     private final ReportService service;
+    private final EmployeeService employeeService;
 
-    public ReportController(ReportService service) {
+    public ReportController(ReportService service,EmployeeService employeeService) {
         this.service = service;
+        this.employeeService = employeeService;
     }
 
     /** 一覧画面を表示 */
@@ -46,26 +50,29 @@ public class ReportController {
     /** report登録画面を表示 */
     @GetMapping("/register")
     public String getRegister(@ModelAttribute Report report,Model model,@AuthenticationPrincipal UserDetails userdetails) {
-        model.addAttribute("loginname",userdetails.getUsername());
+        model.addAttribute("employee",employeeService.findByName(userdetails.getUsername()));
+        //model.addAttribute("loginname",userdetails.getUsername());
         return "report/register";
     }
 
     /** report登録処理*/
     @PostMapping("/register")
-    public String postRegister(@ModelAttribute Report report, Model model) {
+    public String postRegister(@ModelAttribute Report report, Model model,@AuthenticationPrincipal UserDetails userdetails) {
     if("".equals(report.getTitle())||"".equals(report.getContent())||report.getReportDate()==null){
             model.addAttribute("error","必須項目が空欄となっています。");
             return "employee/register";
             }
-        service.saveReport(report);
+       report.setEmployee(employeeService.findByName(userdetails.getUsername()));
+       service.saveReport(report);
         // 一覧画面にリダイレクト
         return "redirect:/report/list";
     }
 
     /** Report更新画面を表示 */
     @GetMapping("/update/{id}/")
-    public String getUpdate(@PathVariable("id") Integer id, Model model) {
+    public String getUpdate(@PathVariable("id") Integer id, Model model,@AuthenticationPrincipal UserDetails userdetails) {
         // Modelに登録
+        model.addAttribute("employee",employeeService.findByName(userdetails.getUsername()));
         model.addAttribute("report", service.getReport(id));
         // employee更新画面に遷移
         return "report/update";
@@ -73,13 +80,14 @@ public class ReportController {
 
     /** Report更新処理 */
     @PostMapping("/update/{id}/")
-    public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("report") Report report, Model model) {
+    public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("report") Report report, Model model,@AuthenticationPrincipal UserDetails userdetails) {
         if("".equals(report.getTitle())||"".equals(report.getContent())) {
            model.addAttribute("error","必須項目が空欄となっています。");
            model.addAttribute("report", service.getReport(id));
            return "report/update";
         }
         // report登録
+        report.setEmployee(employeeService.findByName(userdetails.getUsername()));
         service.saveReport(report);
         // 一覧画面にリダイレクト
         return "redirect:/report/list";
