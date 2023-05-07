@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.techacademy.entity.Employee;
 import com.techacademy.entity.Report;
 import com.techacademy.repository.ReportRepository;
 
@@ -30,6 +31,10 @@ public class ReportService {
     @Transactional
     public Report saveReport(Report report) {
         return reportRepository.save(report);
+    }
+
+    public List<Report>  findByEmployee(Employee employee){
+        return reportRepository.findByEmployee(employee);
     }
 
 

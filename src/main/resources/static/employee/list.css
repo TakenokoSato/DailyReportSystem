@@ -8,3 +8,7 @@ th, td {
     border: solid 1px black;
     padding: 10px 20px;
 }
+
+pre {
+    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}

@@ -5,11 +5,42 @@
 <title>DailyReportSystem of Thymeleaf</title>
 </head>
 <body>
-<h1>日報管理システム</h1>
-   <form method="post" th:action="@{/logout}">
-        <input type="submit" value="ログアウト">
-    </form><br>
-    <a th:href="@{/employee/list}">従業員一覧に戻る</a>
-        <a th:href="@{/report/list}">日報一覧に戻る</a>
+<h1></h1>
+    <header>
+            <h1>日報管理システム</h1>
+            <nav id="global_navi">
+                <ul>
+                    <li><a th:href="@{/employee/list}">従業員管理</a></li>
+                    <li><a th:href="@{/report/list}">日報管理</a></li>
+                    <li><a th:text= "'name:'+${employee.name}+'さん'"></a></li>
+                    <li><form th:method="post" th:action="@{/logout}">
+                          <a th:href="@{/logout}">ログアウト</a>
+                        </form></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+         <table>
+          <tr>
+            <th>氏名</th>
+            <th>日付</th>
+            <th>タイトル</th>
+            <th>操作</th>
+          </tr>
+          <tr th:each="report : ${reportlist}">
+            <td th:text="${report.employee.name}"></td>
+            <td th:text="${report.reportDate}"></td>
+            <td th:text="${report.title}"></td>
+            <td>
+                <a th:href="@{/report/detail/{id}/(id=${report.id})}">詳細を見る</a>
+            </td>
+          </tr>
+         </table>
+        </main>
+           <p th:text="'(全'+${reportlistSize}+'件)'"></p>
+           <p><a th:href="@{/report/register}">新規日報の登録</a></p>
+
+   <!-- <a th:href="@{/employee/list}">従業員一覧に戻る</a>
+        <a th:href="@{/report/list}">日報一覧に戻る</a>-->
 </body>
 </html>
