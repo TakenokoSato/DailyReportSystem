@@ -11,8 +11,9 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
-
+import java.util.List;
 
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
@@ -58,6 +59,10 @@ public class Employee {
 
     @OneToOne(mappedBy="employee", cascade = CascadeType.ALL)
     private Authentication authentication;
+
+    @OneToMany(mappedBy="employee", cascade = CascadeType.ALL)
+     private List<Report> reports;
+
 
     /** レコードが削除される前に行なう処理 */
     @PreRemove

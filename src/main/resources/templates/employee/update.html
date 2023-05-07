@@ -9,16 +9,15 @@
   <p>パスワードは変更する場合のみ入力してください</p>
   <form method="post" th:action="@{/employee/update/{id}/(id=${employee.id})}" th:object="${employee}">
      <label for="authentication.code">社員番号</label>
-      <input type="text" th:field="*{authentication.code}" th:disabled="${someBooleanValue}">
+     <input type="text" th:field="*{authentication.code}" disabled>
+     <input type="hidden" th:field="*{authentication.code}">
         <br>
      <label for="name">氏名</label>
         <input type="text" th:field="*{name}">　 <a th:text="${error}"></a>
         <br>
      <label for="authentication.password">パスワード</label>
-        <input type="password" th:field="*{authentication.password}">　 <a th:text="${error}"></a>
+        <input type="password" th:field="*{authentication.password}">
         <br>
-       　<!--<input type="hidden" name="updatedAt" th:field="*{updatedAt}"  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />-->
-
      <label for="authentication.role">権限</label>
         <select th:field="*{authentication.role}">
             <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}" th:value="${item}" th:text="${item}" th:selected="*{authentication.role} == ${item}">

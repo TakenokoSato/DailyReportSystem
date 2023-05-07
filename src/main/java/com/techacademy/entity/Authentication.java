@@ -29,9 +29,9 @@ public class Authentication {
     }
 
     /** 社員番号 */
-    @Id
     @NotBlank
     @Column(length = 20)
+    @Id
     private String code;
 
     /** パスワード */
@@ -44,7 +44,7 @@ public class Authentication {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /** Id */
+    /** 従業員テーブルのID */
     @OneToOne
     @JoinColumn(name="employee_id", referencedColumnName="id")
     private Employee employee;
