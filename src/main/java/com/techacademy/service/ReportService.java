@@ -15,10 +15,10 @@ public class ReportService {
         this.reportRepository = repository;
     }
     /** 全件を検索して返す */
-    //public List<Report> getReportList(Integer employee_id){
-        // リポジトリのfindAllメソッドを呼び出す
-        //return reportRepository.findAllById(employee_id.toString());
-    //}
+    public List<Report> getReportList(){
+        //リポジトリのfindAllメソッドを呼び出す
+        return reportRepository.findAll();
+    }
 
     /** Reportを1件検索して返す */
     public Report getReport(Integer id) {

@@ -5,8 +5,7 @@
     <title>DailyReportSystem of Thymeleaf</title>
 </head>
 <body>
-    <h1>User情報管理システム</h1>
-    <h2>ログイン</h2>
+    <h1>ログイン</h1>
     <p class="err" th:if="${param.error}">ユーザ名かパスワードが一致しませんでした。</p>
     <form method="post" action="/login" th:action="@{/login}">
     <table>
