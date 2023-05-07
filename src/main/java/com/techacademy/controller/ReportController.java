@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.techacademy.entity.Report;
 import com.techacademy.service.ReportService;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Controller
 @RequestMapping("report")
 public class ReportController {
@@ -42,14 +45,15 @@ public class ReportController {
 
     /** report登録画面を表示 */
     @GetMapping("/register")
-    public String getRegister(@ModelAttribute Report report) {
+    public String getRegister(@ModelAttribute Report report,Model model,@AuthenticationPrincipal UserDetails userdetails) {
+        model.addAttribute("loginname",userdetails.getUsername());
         return "report/register";
     }
 
     /** report登録処理*/
     @PostMapping("/register")
     public String postRegister(@ModelAttribute Report report, Model model) {
-    if("".equals(report.getTitle())||"".equals(report.getContent())|| "".equals(report.getReportDate())){
+    if("".equals(report.getTitle())||"".equals(report.getContent())||report.getReportDate()==null){
             model.addAttribute("error","必須項目が空欄となっています。");
             return "employee/register";
             }
@@ -67,7 +71,7 @@ public class ReportController {
         return "report/update";
     }
 
-    /** Employee更新処理 */
+    /** Report更新処理 */
     @PostMapping("/update/{id}/")
     public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("report") Report report, Model model) {
         if("".equals(report.getTitle())||"".equals(report.getContent())) {

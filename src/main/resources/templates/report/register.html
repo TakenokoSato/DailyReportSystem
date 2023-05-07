@@ -12,7 +12,7 @@
         <input type="date" th:field="*{reportDate}">  <a th:text="${error}"></a>
         <br>
         <label for="employee.name">氏名</label>
-        <input type="text"  th:field="*{employee.name}" disabled>
+        <input type="text"  th:field="*{employee.name}" th:value="${loginname}" disabled>
         <input type="hidden"  th:field="*{employee.name}">
         <br>
         <label for="content">内容</label>
