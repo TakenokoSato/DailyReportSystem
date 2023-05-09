@@ -13,7 +13,7 @@
         <br>
         <label for="employee.name">氏名</label>
         <span th:text="${employee.name}"></span>
-        <!--<span th:text="${loginname}"></span>-->
+        <input type="hidden" th:field="*{employee.name}">
         <br>
         <label for="title">タイトル</label>
         <input type="text" th:field="*{title}"> <a th:text="${error}"></a>

@@ -25,8 +25,9 @@ public class TopController {
     }
 
     @GetMapping("/")
-    public String getTop(@AuthenticationPrincipal UserDetails userdetails,Model model,Employee employee) {
-        //model.addAttribute("employee",employeeService.findByName(userdetails.getUsername()));
+    public String getTop(@AuthenticationPrincipal UserDetails userdetails,Model model) {
+        Employee employee = employeeService.findByName(userdetails.getUsername());
+        model.addAttribute("employee",employeeService.findByName(userdetails.getUsername()));
         model.addAttribute("reportlist", service.findByEmployee(employee));
         // top.htmlに画面遷移
        return "top";
