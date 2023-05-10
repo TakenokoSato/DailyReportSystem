@@ -29,7 +29,9 @@
             <td th:text="${#temporals.format(report.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
         </tr>
     </table>
+    <th:block th:if="${employee.name == report.employee.name}">
     <p><a th:href="@{/report/update/{id}/(id=${report.id})}">この日報を編集する</a></p>
+    </th:block>
     <a th:href="@{/report/list}">一覧に戻る</a>
 </body>
 </html>

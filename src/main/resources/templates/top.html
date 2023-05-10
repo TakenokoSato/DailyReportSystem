@@ -13,9 +13,8 @@
                     <li><a th:href="@{/employee/list}">従業員管理</a></li>
                     <li><a th:href="@{/report/list}">日報管理</a></li>
                     <li><a th:text= "${employee.name}+'さん'"></a></li>
-                    <li><form th:method="post" th:action="@{/logout}">
-                          <a th:href="@{/logout}">ログアウト</a>
-                        </form></li>
+                    <li> <form th:method="post" th:action="@{/logout}">
+                         <button type="submit">ログアウト</button></form></li>
                 </ul>
             </nav>
         </header>

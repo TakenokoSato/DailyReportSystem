@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.techacademy.entity.Report;
 import com.techacademy.service.ReportService;
+import com.techacademy.service.UserDetail;
 import com.techacademy.entity.Employee;
 import com.techacademy.service.EmployeeService;
 
@@ -40,9 +41,10 @@ public class ReportController {
 
     /** 詳細画面を表示 */
     @GetMapping("/detail/{id}/")
-    public String getReport(@PathVariable("id") Integer id, Model model) {
+    public String getReport(@PathVariable("id") Integer id, Model model,@AuthenticationPrincipal UserDetail userdetail) {
         // Modelに登録
         model.addAttribute("report", service.getReport(id));
+        model.addAttribute("employee",userdetail.getEmployee());
         // Employee詳細画面に遷移
         return "report/detail";
     }
@@ -57,13 +59,14 @@ public class ReportController {
 
     /** report登録処理*/
     @PostMapping("/register")
-    public String postRegister(@ModelAttribute Report report, Model model,@AuthenticationPrincipal UserDetails userdetails) {
-    if("".equals(report.getTitle())||"".equals(report.getContent())||report.getReportDate()==null){
+    public String postRegister(@ModelAttribute Report report, Model model,@AuthenticationPrincipal UserDetail userdetail) {
+        if("".equals(report.getTitle())||"".equals(report.getContent())||report.getReportDate()==null){
             model.addAttribute("error","必須項目が空欄となっています。");
-            return "employee/register";
-            }
-       report.setEmployee(employeeService.findByName(userdetails.getUsername()));
-       service.saveReport(report);
+            model.addAttribute("employee",userdetail.getEmployee());
+            return "report/register";
+        }
+        report.setEmployee(userdetail.getEmployee());
+        service.saveReport(report);
         // 一覧画面にリダイレクト
         return "redirect:/report/list";
     }
@@ -82,9 +85,9 @@ public class ReportController {
     @PostMapping("/update/{id}/")
     public String postUpdate(@PathVariable("id") Integer id,@ModelAttribute("report") Report report, Model model,@AuthenticationPrincipal UserDetails userdetails) {
         if("".equals(report.getTitle())||"".equals(report.getContent())) {
-           model.addAttribute("error","必須項目が空欄となっています。");
-           model.addAttribute("report", service.getReport(id));
-           return "report/update";
+            model.addAttribute("error","必須項目が空欄となっています。");
+            model.addAttribute("report", service.getReport(id));
+            return "report/update";
         }
         // report登録
         report.setEmployee(employeeService.findByName(userdetails.getUsername()));
