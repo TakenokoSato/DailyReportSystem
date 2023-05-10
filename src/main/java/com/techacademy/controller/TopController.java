@@ -29,6 +29,7 @@ public class TopController {
         Employee employee = employeeService.findByName(userdetails.getUsername());
         model.addAttribute("employee",employeeService.findByName(userdetails.getUsername()));
         model.addAttribute("reportlist", service.findByEmployee(employee));
+        model.addAttribute("reportlistSize", service.findByEmployee(employee).size());
         // top.htmlに画面遷移
        return "top";
     }

@@ -35,7 +35,7 @@ public class ReportController {
         // 全件検索結果をModelに登録
         model.addAttribute("reportlist", service.getReportList());
         // 検索件数をModelに登録
-        model.addAttribute("reportlistsize", service.getReportList().size());
+        model.addAttribute("reportlistSize", service.getReportList().size());
         return "report/list";
     }
 
